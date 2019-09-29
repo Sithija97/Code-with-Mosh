@@ -19,7 +19,8 @@ export default class TabContainerScreen extends Component {
     return (
       //androidStatusBarColor="#2ed573"
       <Container>
-        <Header style={{backgroundColor: '#2ed573'}}>
+        <Header style={{backgroundColor: '#2ed573'}}
+        androidStatusBarColor="#2ed573">
           <Body>
             <Title style={{fontWeight: 'bold'}}>Header</Title>
           </Body>
