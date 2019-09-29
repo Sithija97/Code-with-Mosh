@@ -1,31 +1,43 @@
 import React from 'react';
 import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
+  Container,
+  Header,
+  Content,
+  List,
+  ListItem,
+  Thumbnail,
   Text,
-  StatusBar,
-} from 'react-native';
+  Left,
+  Body,
+  Right,
+  Button,
+} from 'native-base';
 
 export default class TabTwoScreen extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.text}>TabTwo</Text>
-      </View>
+      <Container>
+        <Content>
+          <List>
+            <ListItem thumbnail>
+              <Left>
+                <Thumbnail square source={{uri: 'Image URL'}} />
+              </Left>
+              <Body>
+                <Text>Sankhadeep</Text>
+                <Text note numberOfLines={1}>
+                  Its time to build a difference . .
+                </Text>
+              </Body>
+              <Right>
+                <Button transparent>
+                  <Text>View</Text>
+                </Button>
+              </Right>
+            </ListItem>
+          </List>
+        </Content>
+      </Container>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
-  },
-  text: {
-    fontWeight: 'bold',
-  },
-});

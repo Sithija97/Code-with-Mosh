@@ -1,21 +1,39 @@
 import React, {Component} from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
-import {Container, Header, Content, Tab, Tabs} from 'native-base';
+import {
+  Container,
+  Header,
+  Content,
+  Tab,
+  Tabs,
+  Body,
+  Title,
+  StatusBar,
+} from 'native-base';
 import TabOneScreen from './TabOne';
 import TabTwoScreen from './TabTwo';
 import TabThreeScreen from './TabThree';
 export default class TabContainerScreen extends Component {
   render() {
     return (
+      //androidStatusBarColor="#2ed573"
       <Container>
-        <Header style={{backgroundColor: '#2ed573'}} hasTabs />
+        <Header style={{backgroundColor: '#2ed573'}}>
+          <Body>
+            <Title style={{fontWeight: 'bold'}}>Header</Title>
+          </Body>
+        </Header>
         <Tabs>
           <Tab
             heading="Tab1"
             tabStyle={{backgroundColor: '#2ed573'}}
             activeTabStyle={{backgroundColor: '#7bed9f'}}
-            textStyle={{backgroundColor: '#2ed573'}}
+            textStyle={{
+              backgroundColor: '#2ed573',
+              color: '#fff',
+              fontWeight: 'bold',
+            }}
             activeTextStyle={{backgroundColor: '#7bed9f'}}>
             <TabOneScreen />
           </Tab>
@@ -24,7 +42,11 @@ export default class TabContainerScreen extends Component {
             heading="Tab2"
             tabStyle={{backgroundColor: '#2ed573'}}
             activeTabStyle={{backgroundColor: '#7bed9f'}}
-            textStyle={{backgroundColor: '#2ed573'}}
+            textStyle={{
+              backgroundColor: '#2ed573',
+              color: '#fff',
+              fontWeight: 'bold',
+            }}
             activeTextStyle={{backgroundColor: '#7bed9f'}}>
             <TabTwoScreen />
           </Tab>
@@ -33,7 +55,11 @@ export default class TabContainerScreen extends Component {
             heading="Tab3"
             tabStyle={{backgroundColor: '#2ed573'}}
             activeTabStyle={{backgroundColor: '#7bed9f'}}
-            textStyle={{backgroundColor: '#2ed573'}}
+            textStyle={{
+              backgroundColor: '#2ed573',
+              color: '#fff',
+              fontWeight: 'bold',
+            }}
             activeTextStyle={{backgroundColor: '#7bed9f'}}>
             <TabThreeScreen />
           </Tab>
