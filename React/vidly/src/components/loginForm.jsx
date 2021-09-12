@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Joi from "joi-browser";
 import Input from "./common/input";
 
 export class loginForm extends Component {
@@ -7,14 +8,32 @@ export class loginForm extends Component {
     errors: {},
   };
 
+  schema = {
+    username: Joi.stringify().required().label("Username"),
+    password: Joi.stringify().required().label("Password"),
+  };
+
   validate = () => {
+    const result = Joi.validate(this.state.account, this.schema, {
+      abortEarly: false,
+    });
+
+    if (!result.error) return null;
+
     const errors = {};
-    const { account } = this.state;
-    if (account.username.trim() === "")
-      errors.username = "Username is required.";
-    if (account.password.trim() === "")
-      errors.password = "Password is required.";
-    return Object.keys(errors).length === 0 ? null : errors;
+    for (let item of result.error.details) {
+      errors[item.path[0]] = item.message;
+      return errors;
+    }
+
+    //   const errors = {};
+    //   const { account } = this.state;
+    //   if (account.username.trim() === "")
+    //     errors.username = "Username is required.";
+    //   if (account.password.trim() === "")
+    //     errors.password = "Password is required.";
+    //   return Object.keys(errors).length === 0 ? null : errors;
+    //
   };
 
   handleSubmit = (e) => {
@@ -30,12 +49,16 @@ export class loginForm extends Component {
   };
 
   validateProperty = ({ name, value }) => {
-    if (name === "username") {
-      if (value.trim() === "") return "Username is required";
-    }
-    if (name === "password") {
-      if (value.trim() === "") return "Password is required";
-    }
+    const obj = { [name]: value };
+    const schema = { [name]: this.schema[name] };
+    const { error } = Joi.validate(obj, schema);
+    return error ? error.details[0].message : null;
+    // if (name === "username") {
+    //   if (value.trim() === "") return "Username is required";
+    // }
+    // if (name === "password") {
+    //   if (value.trim() === "") return "Password is required";
+    // }
   };
 
   handleChange = ({ currentTarget: input }) => {
