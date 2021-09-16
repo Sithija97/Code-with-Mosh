@@ -5,6 +5,7 @@ import { paginate } from "../utils/paginate";
 import ListGroup from "./common/listGroup";
 import { getGenres } from "../services/fakeGenreService";
 import { Link } from "react-router-dom";
+import SearchBox from "./common/searchBox";
 
 class Movies extends Component {
   state = {
@@ -12,6 +13,8 @@ class Movies extends Component {
     genres: [],
     pageSize: 4,
     currentPage: 1,
+    searchQuery: "",
+    selectedGenre: null,
   };
   componentDidMount() {
     const genres = [{ name: "All Genres" }, ...getGenres()];
@@ -28,8 +31,13 @@ class Movies extends Component {
   };
 
   handleGenreSelect = (genre) => {
-    this.setState({ selectedGenre: genre, currentPage: 1 });
+    this.setState({ selectedGenre: genre, searchQuery: "", currentPage: 1 });
   };
+
+  handleSearch = (query) => {
+    this.setState({ searchQuery: query, selectedGenre: null, currentPage: 1 });
+  };
+
   render() {
     const { length: count } = this.state.movies;
     const {
@@ -61,6 +69,8 @@ class Movies extends Component {
           <Link to="/movies/new" className="btn btn-primary mb-4">
             New Movie
           </Link>
+
+          <SearchBox value={this.searchQuery} onChange={this.handleSearch} />
 
           <p>Showing {filtered.length} movies in the database.</p>
           <table class="table">
