@@ -3,6 +3,7 @@ import Login from "./context/login";
 import MoviePage from "./context/moviePage";
 import MovieRow from "./context/movieRow";
 import UserContext from "./context/userContext";
+import CardContext from "./context/cardContext";
 
 export default class App extends Component {
   state = {
@@ -16,17 +17,19 @@ export default class App extends Component {
   };
   render() {
     return (
-      <UserContext.Provider
-        value={{
-          currentUser: this.state.currentUser,
-          onLoggedIn: this.handleLoggedIn,
-        }}
-      >
-        <div>
-          <MoviePage />
-          <Login />
-        </div>
-      </UserContext.Provider>
+      <CardContext.Provider value={{ cart: [] }}>
+        <UserContext.Provider
+          value={{
+            currentUser: this.state.currentUser,
+            onLoggedIn: this.handleLoggedIn,
+          }}
+        >
+          <div>
+            <MoviePage />
+            <Login />
+          </div>
+        </UserContext.Provider>
+      </CardContext.Provider>
     );
   }
 }
