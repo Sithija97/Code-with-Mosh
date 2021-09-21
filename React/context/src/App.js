@@ -1,22 +1,30 @@
 import React, { Component } from "react";
+import Login from "./context/login";
 import MoviePage from "./context/moviePage";
 import MovieRow from "./context/movieRow";
 import UserContext from "./context/userContext";
 
 export default class App extends Component {
   state = {
-    currentUser: { name: "Sithija" },
+    currentUser: { name: null },
+  };
+
+  handleLoggedIn = (username) => {
+    console.log("Getting the user:" + username);
+    const user = { name: username };
+    this.setState({ currentUser: user });
   };
   render() {
     return (
-      // <UserContext.Provider value={this.state.currentUser}>
-      //   <div>
-      //     <MoviePage />
-      //   </div>
-      // </UserContext.Provider>
-      <UserContext.Provider value={this.state.currentUser}>
+      <UserContext.Provider
+        value={{
+          currentUser: this.state.currentUser,
+          onLoggedIn: this.handleLoggedIn,
+        }}
+      >
         <div>
-          <MovieRow />
+          <MoviePage />
+          <Login />
         </div>
       </UserContext.Provider>
     );
